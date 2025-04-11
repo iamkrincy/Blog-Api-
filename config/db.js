@@ -18,19 +18,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-
-const db = mongoose.connection;
-
-db.on('connected', () => {
-  console.log('✅ MongoDB Atlas connected');
-});
-
-db.on('error', (err) => {
-  console.error('❌ MongoDB connection error:', err);
-});
-
-module.exports = db;
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('✅ MongoDB connected'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err));
